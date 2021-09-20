@@ -9,7 +9,7 @@ defmodule StatsWeb.PageController do
   @sort_by_longest_rush "Lng"
   @sort_by_default_sort "Player"
 
-  def index(conn, params) do
+  def index(conn, _params) do
     conn = Plug.Conn.fetch_query_params(conn)
 
     # Can sort by: Yds, TD, Lng
@@ -31,8 +31,15 @@ defmodule StatsWeb.PageController do
     # TODO: add "sort direction" toggle in UI
     out = case sort_key do
       # Reverse sort
-      key when key in [@sort_by_total_rushing_yards, @sort_by_total_rushing_touchdowns] ->
-        Enum.sort(out, fn %{^key => val1}, %{^key => val2} ->
+      @sort_by_total_rushing_yards ->
+        out = Stats.string_nums_to_ints(out, "Yds", "Yds_Int")
+        Enum.sort(out, fn %{"Yds_Int" => val1}, %{"Yds_Int" => val2} ->
+          val1 >= val2 end)
+
+      # Reverse sort
+      @sort_by_total_rushing_touchdowns ->
+        out = Stats.string_nums_to_ints(out, "TD", "TD_Int")
+        Enum.sort(out, fn %{"TD_Int" => val1}, %{"TD_Int" => val2} ->
           val1 >= val2 end)
 
       # Strip "T" is present, convert to int, and then reverse sort
