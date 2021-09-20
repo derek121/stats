@@ -1,0 +1,56 @@
+<% checked_player = if @sort_key == "Player", do: "checked", else: "" %>
+<% checked_yds = if @sort_key == "Yds", do: "checked", else: "" %>
+<% checked_td = if @sort_key == "TD", do: "checked", else: "" %>
+<% checked_lng = if @sort_key == "Lng", do: "checked", else: "" %>
+
+<form name="stats">
+    <b>Sort By:</b><br>
+        <input type="radio" name="sort_by" value="Player" <%= checked_player %> > <i>Player</i> (Last Name)
+        <input type="radio" name="sort_by" value="Yds" <%= checked_yds %> > <i>Yds</i> (Total Rushing Yards)
+        <input type="radio" name="sort_by" value="TD" <%= checked_td %> > <i>TD</i> (Total Rushing Touchdowns)
+        <input type="radio" name="sort_by" value="Lng" <%= checked_lng %> > <i>Lng</i> (Longest Rush. T=Touchdown Occurred)
+    <br>
+
+    <input type="submit" value="Search">
+</form>
+
+<p>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Player</th>
+        <th>Team</th>
+        <th>Pos</th>
+        <th>Att</th>
+        <th>Att/G</th>
+        <th>Yds</th> <!-- To sort: Total Rushing Yards -->
+        <th>Avg</th>
+        <th>Yds/G</th>
+        <th>TD</th> <!-- To sort: Total Rushing Touchdowns -->
+        <th>Lng</th> <!-- To sort: Longest Rush (T means touchdown occurrred) -->
+        <th>1st</th>
+        <th>1st%</th>
+        <th>20+</th>
+        <th>40+</th>
+        <th>FUM</th>
+    </tr>
+    <%= for row <- @out do %>
+    <tr>
+        <td><%= row["Player"] %></td>
+        <td><%= row["Team"] %></td>
+        <td><%= row["Pos"] %></td>
+        <td><%= row["Att"] %></td>
+        <td><%= row["Att/G"] %></td>
+        <td><%= row["Yds"] %></td>
+        <td><%= row["Avg"] %></td>
+        <td><%= row["Yds/G"] %></td>
+        <td><%= row["TD"] %></td>
+        <td><%= row["Lng"] %></td>
+        <td><%= row["1st"] %></td>
+        <td><%= row["1st%"] %></td>
+        <td><%= row["20+"] %></td>
+        <td><%= row["40+"] %></td>
+        <td><%= row["FUM"] %></td>
+    </tr>
+    <% end %>
+</table>
