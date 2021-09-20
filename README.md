@@ -4,7 +4,9 @@ Viewer for json file of various NFL stats.
 
 # Notes
 
-Screenshots are in `priv/screenshots`. 
+Screenshots are in `priv/screenshots`. This is only the first screenful, 
+for the screenshot. As seen in the input file used, the whole file
+is being processed and output.
 
 Searching by a given field will maintain that search key
 in the query string in the URL.
