@@ -1,18 +1,31 @@
 # Stats
 
-To start your Phoenix server:
+Viewer for json file of various NFL stats.
 
-  * Install dependencies with `mix deps.get`
-  * Start Phoenix endpoint with `mix phx.server`
+# Notes
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Screenshots are in `priv/screenshots`. 
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Searching by a given field will maintain that search key
+in the query string in the URL.
 
-## Learn more
+In the input file (`priv/rushing.json`), some of the fields
+to sort on are ints, and some are strings. That's accounted
+for in the code. Since I have to sort on the int fields,
+I add a new key (e.g., `Yds_Int`) and int value on which
+I do the sorting, but then just use the original key/value,
+whether int or string, for display.
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Default sort is on *Player* last name.
+
+
+# Files
+
+* `stats_web/router.ex` - Routing
+* `stats_web/controllers/page_controller.ex` - Main logic
+* `stats/stats.ex` - helper functions
+* `stats_web/templates/page/index.html.eex` - Output template
+* `test/stats/stats_test.exs` - Brief testing. If had more time,
+would add more, of course.
+* `priv/rushing.json` - Input file
+* `priv/screenshots/` - Example output for different sorts
